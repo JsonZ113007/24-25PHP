@@ -19,7 +19,7 @@
     <div class="row">
         <div class="col">
             <ol>
-                <li><a href="welcome/index.php">Welcome Project</a> - Introduction to Form values </li>
+                <li><a href="welcome">Welcome Project</a> - Introduction to Form values.</li>
             </ol>
         </div>
     </div>
