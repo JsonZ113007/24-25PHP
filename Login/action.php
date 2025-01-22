@@ -1,4 +1,20 @@
 <?php
+// Setup our variables and set them to empty.
+$user = $pass = "";
+
+// Condition to detect form data and sanitize it.
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $user = sanitize_inputs($_POST["user"]);
+    $pass = sanitize_inputs($_POST["pass"]);
+}
+// Function to sanitize the data
+function sanitize_inputs($data){
+    // Trim method removes spaces at beginning and end.
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
 
 // Values for MySQL Connection
 $servername = "localhost";
@@ -25,7 +41,12 @@ $result = mysqli_query($conn, $sql);
 if(mysqli_num_rows($result) > 0) {
     // Output the data
     while ($row = mysqli_fetch_assoc($result)) {
-        echo "<br />Username: " . $row["user"] . " - Password: " . $row["pass"] . "";
+        if ($row["user"] == $user && $row["pass"] === $pass) {
+            echo "Login Successful";
+        }else{
+            echo "Login Failed";
+        }
+
     }
 } else {
     echo "0 results";
